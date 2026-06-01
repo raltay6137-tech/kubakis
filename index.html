@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kastamonu Üniversitesi'ne Bakış</title>
+    <!-- FontAwesome İkonları için -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Temel Renkler ve Font ayarları --- */
+        :root {
+            --primary-color: #800020; /* Bordo / Koyu Kırmızı */
+            --secondary-color: #D4AF37; /* Altın Sarısı */
+            --dark-color: #1a1a1a;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* --- Navigasyon Menüsü --- */
+        header {
+            background-color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0.7rem;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--secondary-color);
+        }
+
+        /* Mobil Menü Butonu */
+        .menu-toggle {
+            display: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- Sayfa Yapısı (Görünürlük Kontrolü) --- */
+        .page {
+            display: none;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Genel Bileşen Tasarımları --- */
+        h1, h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(128, 0, 32, 0.8), rgba(26, 26, 26, 0.9)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3') no-repeat center center/cover;
+            color: #fff;
+            padding: 6rem 2rem;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            max-width: 700px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            padding: 0.7rem 1.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background-color: #f1c40f;
+        }
+
+        /* Kart Yapıları (Grid) */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card i {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Form Tasarımı */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        form {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--dark-color);
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            border-top: 3px solid var(--secondary-color);
+        }
+
+        /* --- Mobil Duyarlılık (Responsive) --- */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVİGASYON BARI -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#" onclick="showPage('home')">KÜ'ne <span>Bakış</span></a>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="nav-item active" onclick="showPage('home', this)">Ana Sayfa</a></li>
+                <li><a href="#" class="nav-item" onclick="showPage('about', this)">Hakkımızda</a></li>
+                <li><a href="#" class="nav-item" onclick="showPage('campus', this)">Kampüs Yaşamı</a></li>
+                <li><a href="#" class="nav-item" onclick="showPage('projects', this)">Projelerimiz</a></li>
+                <li><a href="#" class="nav-item" onclick="showPage('contact', this)">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 1. SAYFA: ANA SAYFA -->
+    <main id="home" class="page active">
+        <div class="hero">
+            <h1>Kastamonu Üniversitesi'ne Bakış'a Hoş Geldiniz</h1>
+            <p>Üniversitemizin dinamik yapısını, projelerini, kampüs kültürünü ve şehre kattığı değeri tek bir noktadan keşfedin.</p>
+            <a href="#" class="btn" onclick="showPage('about')">Keşfetmeye Başla</a>
+        </div>
+
+        <h2 style="text-align: center; margin-top: 3rem;">Öne Çıkan Başlıklar</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Nitelikli Eğitim</h3>
+                <p>Gelişen fakülteleri ve yetkin akademik kadrosuyla geleceğe güvenle hazırlayan bir eğitim anlayışı.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-flask"></i>
+                <h3>İhtisaslaşma Projeleri</h3>
+                <p>Kastamonu Üniversitesi, ormancılık ve tabiat turizmi alanlarında Türkiye'nin öncü ihtisas üniversitesidir.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-users"></i>
+                <h3>Aktif Topluluklar</h3>
+                <p>Öğrencilerin sosyal, kültürel ve bilimsel gelişimlerini destekleyen onlarca aktif öğrenci topluluğu.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 2. SAYFA: HAKKIMIZDA -->
+    <section id="about" class="page">
+        <h1>Hakkımızda</h1>
+        <p style="font-size: 1.1rem; margin-bottom: 1.5rem;"><strong>Kastamonu Üniversitesi'ne Bakış</strong>, üniversitemizin kampüs kültürünü, akademik başarılarını, sosyal imkanlarını ve ürettiği projeleri hem öğrencilere hem de dış dünyaya en doğru şekilde tanıtmak amacıyla kurulmuş bağımsız bir platform projesidir.</p>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>Misyonumuz</h3>
+                <p>Kastamonu Üniversitesi'nin ulusal ve uluslararası arenadaki görünürlüğünü artırmak, öğrencilerin projelerini ve seslerini dijital dünyada daha geniş kitlelere ulaştırmak.</p>
+            </div>
+            <div class="card">
+                <h3>Vizyonumuz</h3>
+                <p>Üniversitemizle ilgili dijital içerik üretiminde, web teknolojilerinde ve sosyal medya entegrasyonlarında akla gelen ilk, en dinamik ve yenilikçi tanıtım platformu olmak.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. SAYFA: KAMPÜS YAŞAMI -->
+    <section id="campus" class="page">
+        <h1>Kampüs Yaşamı</h1>
+        <p>Kuzeykent Kampüsü'nde hayat nasıl akıyor? Sosyal alanlar, etkinlikler ve doğayla iç içe bir üniversite deneyimi.</p>
+        
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-utensils"></i>
+                <h3>Sosyal & Gastronomi Alanları</h3>
+                <p>Öğrencilerimizin ve personelimizin keyifle vakit geçirdiği Ay Yıldız Restoran başta olmak üzere modern sosyal tesisler ve kafeteryalar.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-volleyball-ball"></i>
+                <h3>Spor ve Aktivite</h3>
+                <p>Yarı olimpik yüzme havuzu, kapalı spor salonları ve açık sahalarla sağlıklı kampüs hayatı her zaman destekleniyor.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-theater-masks"></i>
+                <h3>Kültür & Sanat</h3>
+                <p>Sezai Karakoç Salonu ve konferans merkezlerinde yıl boyu süren paneller, tiyatrolar, konserler ve kariyer günleri.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SAYFA: PROJELERİMİZ -->
+    <section id="projects" class="page">
+        <h1>Projelerimiz ve Dijital Çalışmalar</h1>
+        <p>Üniversite vizyonunu dijital dünyaya taşıyan yenilikçi çalışmalarımız ve teknik projelerimiz.</p>
+        
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-laptop-code"></i>
+                <h3>Web ve Mobil Entegrasyonlar</h3>
+                <p>Kampüs içi sosyal alanların menülerinden tanıtım sayfalarına kadar tüm dijital arayüzleri akıllı telefonlarla %100 uyumlu (responsive) hale getiriyoruz.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-video"></i>
+                <h3>Dikey Video ve Medya Üretimi</h3>
+                <p>Sosyal medya trendlerine uygun, 9:16 formatında dinamik ve yüksek kaliteli tanıtım videoları ile kampüsün enerjisini ekranlara taşıyoruz.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SAYFA: İLETİŞİM -->
+    <section id="contact" class="page">
+        <h1>İletişim</h1>
+        <p>Görüş, öneri veya iş birliği talepleriniz için bizimle iletişime geçebilirsiniz.</p>
+        
+        <div class="contact-container" style="margin-top: 2rem;">
+            <form onsubmit="event.preventDefault(); alert('Mesajınız başarıyla simüle edildi!');">
+                <div class="form-group">
+                    <label for="name">Adınız Soyadınız</label>
+                    <input type="text" id="name" required placeholder="Örn: Ahmet Yılmaz">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-posta Adresiniz</label>
+                    <input type="email" id="email" required placeholder="Örn: ahmet@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">Mesajınız</label>
+                    <textarea id="message" rows="5" required placeholder="Mesajınızı buraya yazın..."></textarea>
+                </div>
+                <button type="submit" class="btn" style="border:none; cursor:pointer;">Gönder</button>
+            </form>
+
+            <div style="padding: 1rem;">
+                <h3>İletişim Bilgileri</h3>
+                <p style="margin-top: 1rem;"><i class="fas fa-map-marker-alt" style="color:var(--primary-color); margin-right: 10px;"></i> Kuzeykent Kampüsü, Kastamonu</p>
+                <p style="margin-top: 0.5rem;"><i class="fas fa-envelope" style="color:var(--primary-color); margin-right: 10px;"></i> info@kuyabakis.com</p>
+                <p style="margin-top: 0.5rem;"><i class="fas fa-globe" style="color:var(--primary-color); margin-right: 10px;"></i> www.kastamonu.edu.tr</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Kastamonu Üniversitesi'ne Bakış Platformu. Tüm Hakları Saklıdır.</p>
+    </footer>
+
+    <!-- JAVASCRIPT: Sayfa Geçişleri ve Mobil Menü Yönetimi -->
+    <script>
+        // Sayfa Değiştirme Fonksiyonu
+        function showPage(pageId, element) {
+            // Tüm sayfaları gizle
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // İstenen sayfayı göster
+            const activePage = document.getElementById(pageId);
+            if(activePage) {
+                activePage.scrollIntoView({ behavior: 'smooth' });
+                activePage.classList.add('active');
+            }
+
+            // Menüdeki aktif linki güncelle
+            if(element) {
+                const navItems = document.querySelectorAll('.nav-item');
+                navItems.forEach(item => item.classList.remove('active'));
+                element.classList.add('active');
+            }
+
+            // Mobil menü açıksa kapat
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.remove('show');
+        }
+
+        // Mobil Menü Aç/Kapat
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
